@@ -49,21 +49,6 @@ function SubcategoryService() {
         return indexFound;
     }
 
-    function findIndex(id) {
-		var
-			lista = list,
-			indexFound = null;
-
-		lista.some(function(subcategory, index){
-			if(id == subcategory.id) {
-				indexFound = index;
-				return true;
-			}
-		});
-
-        return indexFound;
-    }
-
     //public methods
     this.add = add
     this.getList = getList
