@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<title>Categoria e Subcategorias</title>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<header>
+		<h1>Insira uma categoria e subcategorias</h1>
+	</header>
+
+	<section id="content">
+		<div class="pure-control-group">
+				<label for="category">Categoria</label>
+				<input id="category" type="text" placeholder="Categoria" required>
+		</div>
+
+		<form class="pure-form pure-form-aligned">
+			<fieldset>
+				<div class="pure-control-group">
+						<label for="subcategory">Subcategoria</label>
+						<input id="subcategory" type="text" placeholder="Subcategoria" required>
+				</div>
+				<div class="pure-control-group">
+						<label for="description">Descrição</label>
+						<input id="description" type="text" placeholder="Descrição" required>
+				</div>
+				<div class="pure-controls">
+					<button type="submit" class="pure-button pure-button-primary">Cadastrar</button>
+				</div>
+			</fieldset>
+		</form>
+
+		<table id="tableSubcategory">
+			<tr>
+				<th>Subcategoria</th>
+				<th>Descrição</th>
+			</tr>
+		</table>
+
+		<div class="btn">
+			<button id="btnSave" type="submit" class="pure-button pure-button-primary">Salvar</button>
+		</div>
+	</section>
+
+	<script src="js/SubcategoryService.js"></script>
+	<script src="js/SubcategoryController.js"></script>
+</body>
+</html>
