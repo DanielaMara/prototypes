@@ -49,8 +49,42 @@ function SubcategoryService() {
         return indexFound;
     }
 
+    function getItemById(id) {
+		var
+			lista = list,
+			item = null;
+
+		lista.some(function(subcategory, index){
+			if(id == subcategory.id) {
+                item = {
+                    id: subcategory.id,
+        			name: subcategory.name,
+        			description: subcategory.description
+        		};
+				return true;
+			}
+		});
+
+        return item;
+    }
+
+    function update(item) {
+		list.some(function(subcategory, index){
+			if(item.id == subcategory.id) {
+                subcategory.id = item.id,
+        		subcategory.name = item.name,
+        		subcategory.description = item.description
+				return true;
+			}
+		});
+
+        saveToLocalStorage(list);
+    }
+
     //public methods
     this.add = add
     this.getList = getList
     this.remove = remove
+    this.getItemById = getItemById
+    this.update = update
 }

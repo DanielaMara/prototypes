@@ -3,14 +3,33 @@ function SubcategoryController() {
 
     function init() {
         setForm();
+        setBtnSave();
         listSubcategories();
     }
 
     function setForm() {
         var form = document.querySelector('form');
+
 		form.addEventListener('submit', function(event) {
-			addSubcategory(form);
-			clearForm(form);
+            var id = document.getElementById('input_id').value;
+
+            if(id != '') {
+                updateSubcategory(form);
+            } else {
+                addSubcategory(form);
+            }
+
+            clearForm(form);
+			event.preventDefault();
+		});
+    }
+
+    function setBtnSave() {
+        var btn_save = document.getElementById('btnSave');
+
+        btn_save.addEventListener('click', function(event) {
+            var category = getCategory();
+            console.log("categoria: " + JSON.stringify(category));
 			event.preventDefault();
 		});
     }
@@ -24,11 +43,11 @@ function SubcategoryController() {
 
 		subcategoryService.add(subcategory);
 		addSubcategoryToHTML(subcategory);
-        index++;
     }
 
     function clearForm(form) {
-        form.reset();
+        form.subcategory.value = '';
+        form.description.value = '';
     }
 
     function addSubcategoryToHTML(subcategory) {
@@ -90,7 +109,21 @@ function SubcategoryController() {
     }
 
     function editSubcategory(image) {
-        console.log('Edit: ' + JSON.stringify(image))
+        var item = subcategoryService.getItemById(image.dataset.id)
+        document.getElementById('input_id').value = item.id;
+        document.getElementById('subcategory').value = item.name;
+        document.getElementById('description').value = item.description;
+    }
+
+    function updateSubcategory(form) {
+        var item = {
+            id: form.input_id.value,
+			name: form.subcategory.value,
+			description: form.description.value
+		};
+
+        subcategoryService.update(item);
+        //TODO:limpar input hidden
     }
 
     function deleteSubcategory(image) {
@@ -105,6 +138,31 @@ function SubcategoryController() {
 		subcategories.forEach(function(subcategory) {
 			addSubcategoryToHTML(subcategory);
 		});
+    }
+
+    function getCategory() {
+        var category,
+            category_name = document.getElementById('category').value,
+            client = 1,
+            subcategories = removeIdFromSubcategories();
+
+        category = {
+            name: category_name,
+            client: client,
+            subcategories: subcategories
+        };
+
+        return category;
+    }
+
+    function removeIdFromSubcategories() {
+        var subcategories = subcategoryService.getList();
+
+        subcategories.forEach(function(subcategory) {
+			delete subcategory['id'];
+		});
+
+        return subcategories;
     }
 
     //public methods
