@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load  resources_extras %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+{% for aluno in alunos %}
+    <p>{{ aluno.name|replace:'ar' }} - {{ aluno.age }}</p>
+{% endfor %}
+{% endblock content %}
